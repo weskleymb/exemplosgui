@@ -12,7 +12,7 @@ public class GuiMenuPrincipal extends JFrame {
     private JMenuItem miSair, miBotao, miCaixaOpcao, miRadio;
     private JMenuItem miLista, miListaFoto, miAreaDeTexto;
     private JMenuItem miDialogoMensagem, miDialogoConfirmacao;
-    private JMenuItem miDialogoOpcao;
+    private JMenuItem miDialogoOpcao, miGrade;
     
     public GuiMenuPrincipal() {
         inicializarComponentes();
@@ -37,6 +37,7 @@ public class GuiMenuPrincipal extends JFrame {
         miDialogoMensagem = new JMenuItem("Diálogo Mensagem");
         miDialogoConfirmacao = new JMenuItem("Diálogo Confirmação");
         miDialogoOpcao = new JMenuItem("Diálogo Opção");
+        miGrade = new JMenuItem("Grade");
         
         mnArquivo.setMnemonic('A');
         mnExemplos.setMnemonic('E');
@@ -51,6 +52,7 @@ public class GuiMenuPrincipal extends JFrame {
         mnExemplos.add(miDialogoMensagem);
         mnExemplos.add(miDialogoConfirmacao);
         mnExemplos.add(miDialogoOpcao);
+        mnExemplos.add(miGrade);
         
         mnBarra.add(mnArquivo);
         mnBarra.add(mnExemplos);
@@ -142,6 +144,15 @@ public class GuiMenuPrincipal extends JFrame {
                 GuiDialogoOpcao opcao = new GuiDialogoOpcao();
                 contentPane.removeAll();
                 contentPane.add(opcao);
+                contentPane.validate();
+            }
+        });
+        miGrade.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiGrade grade = new GuiGrade();
+                contentPane.removeAll();
+                contentPane.add(grade);
                 contentPane.validate();
             }
         });
