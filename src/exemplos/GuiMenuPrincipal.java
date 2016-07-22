@@ -12,6 +12,7 @@ public class GuiMenuPrincipal extends JFrame {
     private JMenuItem miSair, miBotao, miCaixaOpcao, miRadio;
     private JMenuItem miLista, miListaFoto, miAreaDeTexto;
     private JMenuItem miDialogoMensagem, miDialogoConfirmacao;
+    private JMenuItem miDialogoOpcao;
     
     public GuiMenuPrincipal() {
         inicializarComponentes();
@@ -35,6 +36,7 @@ public class GuiMenuPrincipal extends JFrame {
         miAreaDeTexto = new JMenuItem("Área de Texto");
         miDialogoMensagem = new JMenuItem("Diálogo Mensagem");
         miDialogoConfirmacao = new JMenuItem("Diálogo Confirmação");
+        miDialogoOpcao = new JMenuItem("Diálogo Opção");
         
         mnArquivo.setMnemonic('A');
         mnExemplos.setMnemonic('E');
@@ -48,6 +50,7 @@ public class GuiMenuPrincipal extends JFrame {
         mnExemplos.add(miAreaDeTexto);
         mnExemplos.add(miDialogoMensagem);
         mnExemplos.add(miDialogoConfirmacao);
+        mnExemplos.add(miDialogoOpcao);
         
         mnBarra.add(mnArquivo);
         mnBarra.add(mnExemplos);
@@ -130,6 +133,15 @@ public class GuiMenuPrincipal extends JFrame {
                 GuiDialogoConfirmacao confirmacao = new GuiDialogoConfirmacao();
                 contentPane.removeAll();
                 contentPane.add(confirmacao);
+                contentPane.validate();
+            }
+        });
+        miDialogoOpcao.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GuiDialogoOpcao opcao = new GuiDialogoOpcao();
+                contentPane.removeAll();
+                contentPane.add(opcao);
                 contentPane.validate();
             }
         });
