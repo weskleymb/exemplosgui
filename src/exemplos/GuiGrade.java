@@ -39,7 +39,7 @@ public class GuiGrade extends JPanel {
         tfTotal = new JTextField();
         tfProduto = new JTextField();
         tfPrecoUnitario = new JTextField();
-        tfQuantidade = new JTextField();
+        tfQuantidade = new JTextField("1");
         btAdicionar = new JButton("Adicionar");
         btRemover = new JButton("Remover");
         scrollTable = new JScrollPane();
