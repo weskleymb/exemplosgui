@@ -1,6 +1,8 @@
 package exemplos;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -27,16 +29,17 @@ public class GuiGrade extends JPanel {
     private void inicializarComponentes() {
         setLayout(null);
         
-        lbProduto = new JLabel("Produto");
-        lbQuantidade = new JLabel("Quantidade");
-        lbPrecoUnitario = new JLabel("Preço Unitário");
+        
         lbNumero = new JLabel("Número do Pedido:");
         lbTotal = new JLabel("Total do Pedido:");
+        lbProduto = new JLabel("Produto");
+        lbPrecoUnitario = new JLabel("Preço Unitário");
+        lbQuantidade = new JLabel("Quantidade");
+        tfNumero = new JTextField();
+        tfTotal = new JTextField();
         tfProduto = new JTextField();
         tfPrecoUnitario = new JTextField();
         tfQuantidade = new JTextField();
-        tfNumero = new JTextField();
-        tfTotal = new JTextField();
         btAdicionar = new JButton("Adicionar");
         btRemover = new JButton("Remover");
         scrollTable = new JScrollPane();
@@ -120,7 +123,44 @@ public class GuiGrade extends JPanel {
     }
 
     private void definirEventos() {
+        btAdicionar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (tfProduto.getText().equals("") || tfQuantidade.getText().equals("") || tfPrecoUnitario.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+                    return;
+                }
+                DefaultTableModel model = (DefaultTableModel) table.getModel();
+                model.addRow(new Object[] {
+                    tfProduto.getText(), 
+                    tfQuantidade.getText(), 
+                    tfPrecoUnitario.getText(), 
+                    "" + df.format(Integer.parseInt(tfQuantidade.getText()) * Float.parseFloat(tfPrecoUnitario.getText()))
+                });
+                limparCampos();
+                calcularTotal();
+            }
+
+            
+        });
+    }
     
+    private void limparCampos() {
+        tfProduto.setText("");
+        tfQuantidade.setText("1");
+        tfPrecoUnitario.setText("");
+        tfProduto.requestFocus();
+    }
+
+    private void calcularTotal() {
+        float total = 0f;
+        for (int linha = 0; linha < table.getRowCount(); linha++) {
+            String valor = "" + table.getValueAt(linha, 3);
+            valor = valor.replace(".", "");
+            valor = valor.replace(",", ".");
+            total += Float.parseFloat(valor);
+        }
+        tfTotal.setText("" + df.format(total));
     }
     
 }
